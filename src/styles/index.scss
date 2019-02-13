@@ -1,0 +1,17 @@
+@import './variables.scss';
+@import './font.scss';
+
+body {
+    font-family: $font-family;
+
+    font-size: 13px;
+
+    margin: 0;
+    padding: 0;
+
+    color: $color-text-black;
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}

@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+
+.CurrencyCard {
+    padding: 70px 24px;
+
+    &_type {
+        &_sell {
+            background-color: $color-light-gray;
+        }
+    }
+
+    &-Row {
+        display: flex;
+    }
+}
