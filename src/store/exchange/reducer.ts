@@ -1,20 +1,35 @@
 import {Reducer} from 'redux';
+import {ActionType, getType} from 'typesafe-actions';
 
-interface ExchangeCard {
-    currency: string;
-    value: number;
-}
+import {CurrencyExchangeType} from '../../models/Exchange';
+import {CurrencyName} from '../../models/Currency';
+import * as exchangeActions from './actions';
 
 export interface IExchangeState {
-    buy: ExchangeCard | null;
-    sell: ExchangeCard | null;
+    readonly selectedAction: CurrencyExchangeType;
+    readonly value: string;
+    readonly sellCurrnecy: CurrencyName;
+    readonly buyCurrency: CurrencyName;
 }
 
+type ExchangeReducer = Reducer<IExchangeState, ActionType<typeof exchangeActions>>;
+
 export const initialExchangeState: IExchangeState = {
-    buy: null,
-    sell: null
+    selectedAction: CurrencyExchangeType.BUY,
+    value: '0',
+    sellCurrnecy: CurrencyName.USD,
+    buyCurrency: CurrencyName.EUR
 };
 
-export const exchangeReducer: Reducer = (state = initialExchangeState) => {
-    return state;
-};
+export const exchangeReducer: ExchangeReducer = (state = initialExchangeState, action) => {
+        switch(action.type) {
+            case (getType(exchangeActions.changeValue)):
+                return {
+                    ...state,
+                    value: action.payload,
+                    selectedAction: action.meta
+                };
+            default:
+                return state;
+        }
+    };

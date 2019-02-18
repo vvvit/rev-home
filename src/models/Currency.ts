@@ -1,7 +1,7 @@
 export const enum CurrencyName {
-    USD = 'usd',
-    EUR = 'eur',
-    GBP = 'gbp',
+    USD = 'USD',
+    EUR = 'EUR',
+    GBP = 'GBP',
 }
 
 export interface ICurrency {

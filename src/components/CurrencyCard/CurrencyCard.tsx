@@ -1,6 +1,8 @@
 import * as React from 'react';
+import {boundMethod} from 'autobind-decorator';
 import {cn} from '@bem-react/classname';
 
+import {CurrencyExchangeType} from '../../models/Exchange';
 import {CurrencySelect} from '../CurrencySelect/CurrencySelect';
 import {PriceInput} from '../PriceInput/PriceInput';
 
@@ -8,29 +10,22 @@ import './CurrencyCard.scss';
 
 const cnApp = cn('CurrencyCard');
 
-const enum CurrencyCardType {
-  buy = 'buy',
-  sell = 'sell'
-}
-
-interface ICurrencyCardProps {
+export interface ICurrencyCardProps {
   currency: string;
-  type?: CurrencyCardType
+  value: string;
+  type: CurrencyExchangeType;
+  onChangeValue: (value: string, type: CurrencyExchangeType) => void;
 }
 
-class CurrencyCard extends React.Component<ICurrencyCardProps> {
-  static defaultProps: Partial<ICurrencyCardProps> = {
-    type: CurrencyCardType.buy
-  };
-
+export class CurrencyCard extends React.Component<ICurrencyCardProps> {
   render() {
-    const { type, currency } = this.props;
+    const { type, currency, value } = this.props;
 
     return (
       <div className={cnApp({type})}>
           <div className={cnApp('Row')}>
             <CurrencySelect value={currency} />
-            <PriceInput />
+            <PriceInput value={value} onChange={this.onChangePrice} />
           </div>
           <div className={cnApp('Row', {justify: 'between'})}>
               <div className={cnApp('Info')}>
@@ -43,6 +38,11 @@ class CurrencyCard extends React.Component<ICurrencyCardProps> {
       </div>
     );
   }
-}
 
-export { CurrencyCard, CurrencyCardType };
+  @boundMethod
+  onChangePrice(value: string) {
+      const {onChangeValue, type} = this.props;
+
+      onChangeValue(value, type);
+  }
+}

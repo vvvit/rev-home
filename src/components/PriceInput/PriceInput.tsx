@@ -6,25 +6,16 @@ import './PriceInput.scss';
 
 interface IPriceInputProps {
     value: string;
-    onChange: (value: number) => void;
-}
-
-interface IPriceInputState {
-    value: string;
+    onChange: (value: string) => void;
 }
 
 const cnPriceInput = cn('PriceInput');
 
 export const MAX_VALUE_LENGHT = 15;
 
-export class PriceInput extends React.Component<IPriceInputProps, IPriceInputState> {
+export class PriceInput extends React.Component<IPriceInputProps> {
     static defaultProps: Partial<IPriceInputProps> = {
-        onChange: () => {},
         value: '0'
-    };
-
-    state: IPriceInputState = {
-        value: this.props.value
     };
 
     @boundMethod
@@ -33,18 +24,20 @@ export class PriceInput extends React.Component<IPriceInputProps, IPriceInputSta
 
         const value = this.formatValue(e.currentTarget.value);
 
-        this.setState({ value });
+        this.props.onChange(value);
     }
 
     render() {
+        const {value} = this.props;
+
         return (
             <div className={cnPriceInput()}>
-                <input className={cnPriceInput('Input')} value={this.state.value} onChange={this.onChange} />
+                <input className={cnPriceInput('Input')} value={value} onChange={this.onChange} />
             </div>
         );
     }
 
-    formatValue(value: string) {
+    formatValue(value: string): string {
         // valid float string without insignificant trailing zeros
         const validNumber = parseFloat(parseFloat(value).toFixed(2));
         let validString = isNaN(validNumber) ? '0' : String(validNumber);
