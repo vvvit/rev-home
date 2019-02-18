@@ -1,0 +1,28 @@
+.Icon {
+    display: inline-block;
+    background: no-repeat center;
+    background-size: contain;
+
+    &_size {
+        &_s {
+            width: 18px;
+            height: 18px;
+        }
+
+        &_m {
+            width: 24px;
+            height: 24px;
+        }
+    }
+
+    &_type {
+        &_arrow-down {
+            background-image: url('assets/arrow-down.svg');
+        }
+
+        &_arrow-up {
+            background-image: url('assets/arrow-down.svg');
+            transform: rotate(180deg);
+        }
+    }
+}
