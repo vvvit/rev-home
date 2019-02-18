@@ -36,19 +36,8 @@ export class PriceInput extends React.Component<IPriceInputProps> {
     onFocus(e: React.FormEvent<HTMLInputElement>) {
         e.persist();
 
-        console.log('Focus');
-        console.log(e.currentTarget.selectionStart);
-    }
-
-    @boundMethod
-    setCaret(e: React.FormEvent<HTMLInputElement>) {
-        e.persist();
-
-        const position = e.currentTarget.selectionStart;
-        const value = e.currentTarget.value;
-
-        if (value.length > 2 && (position || position ===0) && position < 2 && this.inputRef.current) {
-            this.inputRef.current.selectionStart = 2;
+        if (this.inputRef.current) {
+            this.inputRef.current.selectionStart = e.currentTarget.value.length;
         }
     }
 
@@ -81,7 +70,7 @@ export class PriceInput extends React.Component<IPriceInputProps> {
     }
 
     removeDirectionSign(value: string): string {
-        return value.replace(/^[-+]\s/, '');
+        return value.replace(/^[-+]\s?/, '');
     }
 
     componentDidMount() {
@@ -99,8 +88,7 @@ export class PriceInput extends React.Component<IPriceInputProps> {
                     className={cnPriceInput('Input')}
                     value={this.addDirectionSign(value, type)}
                     onChange={this.onChange}
-                    onFocus={this.setCaret}
-                    onMouseUp={this.setCaret}
+                    onFocus={this.onFocus}
                     ref={this.inputRef}
                 />
             </div>

@@ -6,6 +6,7 @@
     &_type {
         &_buy {
             background-color: $color-light-gray;
+            border-top: 1px solid $color-gray;
         }
     }
 
@@ -22,6 +23,7 @@
     &-CardInfo {
         margin-top: 10px;
         font-size: $font-size-l;
+        color: $color-dark-gray;
     }
 
     &-Info_negative {

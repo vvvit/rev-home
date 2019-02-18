@@ -2,11 +2,14 @@ import * as React from 'react';
 import {cn} from '@bem-react/classname';
 
 import {CurrencyExchangeType} from '../../models/Exchange';
-import {CurrencyCard} from '../CurrencyCard/CurrencyCard';
-import {exchangeConnector} from '../CurrencyCard/connectors/exchangeConnector';
 import {CurrencyName} from '../../models/Currency';
+import {CurrencyCard} from '../CurrencyCard/CurrencyCard';
+import {Rate} from '../Rate/Rate';
+import {rateConnector} from '../Rate/connectors/rateConnector';
+import {exchangeConnector} from '../CurrencyCard/connectors/exchangeConnector';
 
 const CurrencyCardContainer = exchangeConnector(CurrencyCard);
+const RateContainer = rateConnector(Rate);
 
 const cnApp = cn('Exchange');
 
@@ -33,6 +36,7 @@ class Exchange extends React.Component<ExchangeProps> {
         return (
             <div className={cnApp()}>
                 <CurrencyCardContainer type={CurrencyExchangeType.SELL} />
+                <RateContainer />
                 <CurrencyCardContainer type={CurrencyExchangeType.BUY} />
             </div>
         );

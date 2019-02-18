@@ -38,7 +38,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => {
     return {
         value,
         currency: currentCurrency,
-        balance: balance[currentCurrency]
+        balance: balance[currentCurrency] || 0
     };
 };
 
