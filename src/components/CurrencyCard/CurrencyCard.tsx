@@ -32,7 +32,7 @@ class CurrencyCard extends React.Component<ICurrencyCardProps> {
             <CurrencySelect value={currency} />
             <PriceInput />
           </div>
-          <div className={cnApp('Row')}>
+          <div className={cnApp('Row', {justify: 'between'})}>
               <div className={cnApp('Info')}>
                   {`Balance: 0.00 ${currency}`}
               </div>

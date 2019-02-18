@@ -11,5 +11,11 @@
 
     &-Row {
         display: flex;
+
+        &_justify {
+            &_between {
+                justify-content: space-between;
+            }
+        }
     }
 }
