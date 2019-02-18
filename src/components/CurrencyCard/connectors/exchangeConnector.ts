@@ -3,6 +3,7 @@ import {Dispatch} from 'redux';
 
 import {RootState} from '../../../store';
 import {exchangeSelector} from '../../../store/exchange/selectors';
+import {rateSelector} from '../../../store/rates/selectors';
 import {changeValue as changeValueAction} from '../../../store/exchange/actions';
 import {ICurrencyCardProps} from '../CurrencyCard';
 import {CurrencyExchangeType} from '../../../models/Exchange';
@@ -10,11 +11,25 @@ import {CurrencyExchangeType} from '../../../models/Exchange';
 type OwnProps = Pick<ICurrencyCardProps, 'type'>;
 type DispatchProps = Pick<ICurrencyCardProps, 'onChangeValue'>;
 
+const calculatePairValue = (rate: number, ammount: number, action: CurrencyExchangeType): string => {
+    const actionRate = action === CurrencyExchangeType.SELL ? rate : 1 / rate;
+
+    return  (actionRate * ammount).toFixed(2);
+};
+
 const mapStateToProps = (state: RootState, props: OwnProps) => {
     const exchange = exchangeSelector(state);
+    const rate = rateSelector(state);
+
     let value = exchange.value;
     if (exchange.selectedAction !== props.type) {
-        value = (1.13 * parseFloat(value)).toFixed(2);
+        if (rate.from === exchange.sellCurrnecy &&
+            rate.to === exchange.buyCurrency &&
+            rate.val) {
+            value = calculatePairValue(rate.val, parseFloat(value), exchange.selectedAction);
+        } else {
+            value = '0';
+        }
     }
 
     return {
