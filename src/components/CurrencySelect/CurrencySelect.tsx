@@ -2,8 +2,10 @@ import * as React from 'react';
 import {boundMethod} from 'autobind-decorator';
 import {cn} from '@bem-react/classname';
 
-import './CurrencySelect.scss';
 import {CurrencyName} from "../../models/Currency";
+import {Icon} from "../Icon/Icon";
+
+import './CurrencySelect.scss';
 
 const cnApp = cn('CurrencySelect');
 
@@ -28,7 +30,7 @@ class CurrencySelect extends React.Component<ICurrencySelectProps, ICurrencySele
 
         return (
             <div className={cnApp()}>
-                <div onClick={this.toggleSelect} className={cnApp('Value')}>{value}</div>
+                <div onClick={this.toggleSelect} className={cnApp('Value')}>{value}<Icon type={isOpen ? 'arrow-up' : 'arrow-down'} /></div>
                 {isOpen && (
                     <div className={cnApp('List')}>
                         <div onClick={this.toggleSelect} className={cnApp('ListItem', {selected: true})}>{value}</div>

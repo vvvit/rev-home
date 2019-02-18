@@ -28,7 +28,7 @@ module.exports = {
         pathinfo: false,
         path: path.resolve('build/static'),
         filename: '[name].js',
-        publicPath: `static/`
+        publicPath: `/`
     },
     optimization: {
         minimizer: [
