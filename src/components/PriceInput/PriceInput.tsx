@@ -2,10 +2,13 @@ import * as React from 'react';
 import {boundMethod} from 'autobind-decorator';
 import {cn} from "@bem-react/classname";
 
+import {CurrencyExchangeType} from '../../models/Exchange';
+
 import './PriceInput.scss';
 
 interface IPriceInputProps {
     value: string;
+    type: CurrencyExchangeType;
     onChange: (value: string) => void;
 }
 
@@ -18,23 +21,35 @@ export class PriceInput extends React.Component<IPriceInputProps> {
         value: '0'
     };
 
+    inputRef = React.createRef<HTMLInputElement>();
+
     @boundMethod
     onChange(e: React.FormEvent<HTMLInputElement>) {
-       e.persist();
+        e.persist();
 
-        const value = this.formatValue(e.currentTarget.value);
+        const value = this.removeDirectionSign(e.currentTarget.value);
 
-        this.props.onChange(value);
+        this.props.onChange(this.formatValue(value));
     }
 
-    render() {
-        const {value} = this.props;
+    @boundMethod
+    onFocus(e: React.FormEvent<HTMLInputElement>) {
+        e.persist();
 
-        return (
-            <div className={cnPriceInput()}>
-                <input className={cnPriceInput('Input')} value={value} onChange={this.onChange} />
-            </div>
-        );
+        console.log('Focus');
+        console.log(e.currentTarget.selectionStart);
+    }
+
+    @boundMethod
+    setCaret(e: React.FormEvent<HTMLInputElement>) {
+        e.persist();
+
+        const position = e.currentTarget.selectionStart;
+        const value = e.currentTarget.value;
+
+        if (value.length > 2 && (position || position ===0) && position < 2 && this.inputRef.current) {
+            this.inputRef.current.selectionStart = 2;
+        }
     }
 
     formatValue(value: string): string {
@@ -53,5 +68,42 @@ export class PriceInput extends React.Component<IPriceInputProps> {
         }
 
         return validString;
+    }
+
+    addDirectionSign(value: string, type: CurrencyExchangeType): string {
+        let sign = '';
+
+        if (parseFloat(value) > 0) {
+            sign = type === CurrencyExchangeType.SELL ? '- ' : '+ ';
+        }
+
+        return sign + value;
+    }
+
+    removeDirectionSign(value: string): string {
+        return value.replace(/^[-+]\s/, '');
+    }
+
+    componentDidMount() {
+        if (this.props.type === CurrencyExchangeType.SELL && this.inputRef.current) {
+            this.inputRef.current.focus();
+        }
+    }
+
+    render() {
+        const {value, type} = this.props;
+
+        return (
+            <div className={cnPriceInput()}>
+                <input
+                    className={cnPriceInput('Input')}
+                    value={this.addDirectionSign(value, type)}
+                    onChange={this.onChange}
+                    onFocus={this.setCaret}
+                    onMouseUp={this.setCaret}
+                    ref={this.inputRef}
+                />
+            </div>
+        );
     }
 }

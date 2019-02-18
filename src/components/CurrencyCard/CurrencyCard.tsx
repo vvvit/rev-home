@@ -32,14 +32,11 @@ export class CurrencyCard extends React.Component<ICurrencyCardProps> {
             <div className={cnApp({type})}>
                 <div className={cnApp('Row')}>
                     <CurrencySelectContainer type={type} value={currency}/>
-                    <PriceInput value={value} onChange={this.onChangePrice}/>
+                    <PriceInput value={value} type={type} onChange={this.onChangePrice}/>
                 </div>
                 <div className={cnApp('Row', {justify: 'between'}, [cnApp('CardInfo')])}>
                     <div className={cnApp('Info', {negative: isNegativeBalance})}>
                         {`Balance: ${balance} ${currency}`}
-                    </div>
-                    <div className={cnApp('Info')}>
-                        {`Inc. Fee: 135.34 ${currency}`}
                     </div>
                 </div>
             </div>
