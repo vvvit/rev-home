@@ -1,7 +1,30 @@
 @import '../../styles/variables.scss';
 
 .CurrencySelect {
+    position: relative;
+    font-size: $font-size-xl;
+
     &-Value {
-        font-size: $font-size-xl;
+        cursor: pointer;
+    }
+
+    &-List {
+        border: 1px solid $color-gray;
+        border-bottom: 0;
+        background: $color-white;
+        position: absolute;
+        z-index: 1;
+        left: -5px;
+        top: -5px;
+    }
+
+    &-ListItem {
+        padding: 4px;
+        border-bottom: 1px solid $color-gray;
+        cursor: pointer;
+
+        &_selected, &:hover {
+            background: $color-light-gray;
+        }
     }
 }

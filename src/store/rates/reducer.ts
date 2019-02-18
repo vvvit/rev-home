@@ -36,7 +36,6 @@ export const ratesReducer: RatesReducer = (state = initialRatesState, action) =>
                 status: ResponseStatus.LOADING
             };
         case (getType(ratesActions.fetchRatesSuccess)):
-            console.log(action);
             return {
                 ...state,
                 status: ResponseStatus.OK,

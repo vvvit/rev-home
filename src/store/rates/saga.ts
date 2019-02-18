@@ -13,7 +13,7 @@ function hasKey<O>(obj: O, key: string | number | symbol): key is keyof O {
 const fetchRates = function*() {
     yield put(ratesActions.fetchRatesRequest());
     const exchange: IExchangeState = yield select(exchangeSelector);
-    const pair = `${exchange.sellCurrnecy}_${exchange.buyCurrency}`;
+    const pair = `${exchange.sellCurrency}_${exchange.buyCurrency}`;
 
     try {
         const rateResponse: RatesResponse = yield call(apiFetchRates, pair);

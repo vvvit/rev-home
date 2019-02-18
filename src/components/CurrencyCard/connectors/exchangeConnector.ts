@@ -23,7 +23,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => {
 
     let value = exchange.value;
     if (exchange.selectedAction !== props.type) {
-        if (rate.from === exchange.sellCurrnecy &&
+        if (rate.from === exchange.sellCurrency &&
             rate.to === exchange.buyCurrency &&
             rate.val) {
             value = calculatePairValue(rate.val, parseFloat(value), exchange.selectedAction);
@@ -35,7 +35,7 @@ const mapStateToProps = (state: RootState, props: OwnProps) => {
     return {
         value,
         currency: props.type === CurrencyExchangeType.SELL ?
-            exchange.sellCurrnecy :
+            exchange.sellCurrency :
             exchange.buyCurrency
     };
 };

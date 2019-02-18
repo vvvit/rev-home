@@ -3,24 +3,28 @@ import {Reducer} from 'redux';
 import {CurrencyName, ICurrency} from '../../models/Currency'
 
 export interface IWalletState {
-    currencies: Partial<Record<CurrencyName, ICurrency>>
+    currencies: Array<ICurrency>;
 }
 
 export const initialWalletState: IWalletState = {
-  currencies: {
-      [CurrencyName.USD]: {
+  currencies: [
+      {
           name: CurrencyName.USD,
           value: 100
       },
-      [CurrencyName.EUR]: {
+      {
           name: CurrencyName.EUR,
           value: 100
       },
-      [CurrencyName.GBP]: {
+      {
           name: CurrencyName.GBP,
           value: 100
       },
-  }
+      {
+          name: CurrencyName.RUB,
+          value: 100
+      }
+  ]
 };
 
 type WalletReducer = Reducer<IWalletState>;
