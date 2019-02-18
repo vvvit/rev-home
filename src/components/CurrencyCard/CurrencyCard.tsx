@@ -15,38 +15,41 @@ const cnApp = cn('CurrencyCard');
 const CurrencySelectContainer = exchangeConnector(CurrencySelect);
 
 export interface ICurrencyCardProps {
-  currency: CurrencyName;
-  value: string;
-  type: CurrencyExchangeType;
-  onChangeValue: (value: string, type: CurrencyExchangeType) => void;
+    currency: CurrencyName;
+    value: string;
+    balance: number;
+    type: CurrencyExchangeType;
+    onChangeValue: (value: string, type: CurrencyExchangeType) => void;
 }
 
 export class CurrencyCard extends React.Component<ICurrencyCardProps> {
-  render() {
-    const { type, currency, value } = this.props;
+    render() {
+        const {type, currency, value, balance} = this.props;
 
-    return (
-      <div className={cnApp({type})}>
-          <div className={cnApp('Row')}>
-            <CurrencySelectContainer type={type} value={currency} />
-            <PriceInput value={value} onChange={this.onChangePrice} />
-          </div>
-          <div className={cnApp('Row', {justify: 'between'})}>
-              <div className={cnApp('Info')}>
-                  {`Balance: 0.00 ${currency}`}
-              </div>
-              <div className={cnApp('Info')}>
-                  {`Inc. Fee: 135.34 ${currency}`}
-              </div>
-          </div>
-      </div>
-    );
-  }
+        const isNegativeBalance = type === CurrencyExchangeType.SELL && (balance < parseFloat(value));
 
-  @boundMethod
-  onChangePrice(value: string) {
-      const {onChangeValue, type} = this.props;
+        return (
+            <div className={cnApp({type})}>
+                <div className={cnApp('Row')}>
+                    <CurrencySelectContainer type={type} value={currency}/>
+                    <PriceInput value={value} onChange={this.onChangePrice}/>
+                </div>
+                <div className={cnApp('Row', {justify: 'between'}, [cnApp('CardInfo')])}>
+                    <div className={cnApp('Info', {negative: isNegativeBalance})}>
+                        {`Balance: ${balance} ${currency}`}
+                    </div>
+                    <div className={cnApp('Info')}>
+                        {`Inc. Fee: 135.34 ${currency}`}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
-      onChangeValue(value, type);
-  }
+    @boundMethod
+    onChangePrice(value: string) {
+        const {onChangeValue, type} = this.props;
+
+        onChangeValue(value, type);
+    }
 }

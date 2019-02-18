@@ -4,6 +4,7 @@ import {Dispatch} from 'redux';
 import {RootState} from '../../../store';
 import {exchangeSelector} from '../../../store/exchange/selectors';
 import {rateSelector} from '../../../store/rates/selectors';
+import {currancyBalanceSelector} from '../../../store/wallet/selectors';
 import {changeValue as changeValueAction} from '../../../store/exchange/actions';
 import {ICurrencyCardProps} from '../CurrencyCard';
 import {CurrencyExchangeType} from '../../../models/Exchange';
@@ -14,12 +15,14 @@ type DispatchProps = Pick<ICurrencyCardProps, 'onChangeValue'>;
 const calculatePairValue = (rate: number, ammount: number, action: CurrencyExchangeType): string => {
     const actionRate = action === CurrencyExchangeType.SELL ? rate : 1 / rate;
 
-    return  (actionRate * ammount).toFixed(2);
+    return  String(parseFloat((actionRate * ammount).toFixed(2)));
 };
 
 const mapStateToProps = (state: RootState, props: OwnProps) => {
     const exchange = exchangeSelector(state);
     const rate = rateSelector(state);
+    const balance = currancyBalanceSelector(state);
+    const currentCurrency = props.type === CurrencyExchangeType.SELL ? exchange.sellCurrency : exchange.buyCurrency;
 
     let value = exchange.value;
     if (exchange.selectedAction !== props.type) {
@@ -34,9 +37,8 @@ const mapStateToProps = (state: RootState, props: OwnProps) => {
 
     return {
         value,
-        currency: props.type === CurrencyExchangeType.SELL ?
-            exchange.sellCurrency :
-            exchange.buyCurrency
+        currency: currentCurrency,
+        balance: balance[currentCurrency]
     };
 };
 

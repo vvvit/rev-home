@@ -10,11 +10,11 @@ export const initialWalletState: IWalletState = {
   currencies: [
       {
           name: CurrencyName.USD,
-          value: 100
+          value: 99.8
       },
       {
           name: CurrencyName.EUR,
-          value: 100
+          value: 50
       },
       {
           name: CurrencyName.GBP,
@@ -22,7 +22,7 @@ export const initialWalletState: IWalletState = {
       },
       {
           name: CurrencyName.RUB,
-          value: 100
+          value: 1000
       }
   ]
 };
