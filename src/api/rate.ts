@@ -1,21 +1,33 @@
 import {AxiosRequestConfig} from 'axios';
 
 import {baseRequest} from './request';
+import {CurrencyName} from '../models/Currency';
 
-export const getRates = () => {
+// DON'T COMMIT IN VCS
+const API_KEY = 'e633ec2ee30c96d9f5d2';
+
+export interface RatesResponse {
+    results?: {
+        [key: string]: {
+            fr: CurrencyName;
+            to: CurrencyName;
+            val: number;
+        };
+    };
+}
+
+export const fetchRates = (pair: string) => {
     const config: AxiosRequestConfig = {
         method: 'GET',
-        url: 'https://openexchangerates.org/api/latest.json',
-        data: {
-            'app_id': '2fe61c62959e4b329c9bbf225743673c',
-            'base': 'GBP'
+        url: 'https://free.currencyconverterapi.com/api/v6/convert',
+        params: {
+            q: pair,
+            apiKey: API_KEY
         }
     };
 
-    return baseRequest(config)
+    return baseRequest<RatesResponse>(config)
         .then(result => {
-            const data = result && result.data;
-
-            console.log(data);
+            return result && result.data;
         });
 };

@@ -9,12 +9,20 @@ const CurrencyCardContainer = exchangeConnector(CurrencyCard);
 
 const cnApp = cn('Exchange');
 
-class Exchange extends React.Component {
+export interface ExchangeProps {
+    updateRates: () => void;
+}
+
+class Exchange extends React.Component<ExchangeProps> {
+    componentDidMount() {
+        this.props.updateRates();
+    }
+
     render() {
         return (
             <div className={cnApp()}>
-                <CurrencyCardContainer type={CurrencyExchangeType.BUY} />
                 <CurrencyCardContainer type={CurrencyExchangeType.SELL} />
+                <CurrencyCardContainer type={CurrencyExchangeType.BUY} />
             </div>
         );
     }

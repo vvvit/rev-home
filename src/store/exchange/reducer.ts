@@ -15,7 +15,7 @@ export interface IExchangeState {
 type ExchangeReducer = Reducer<IExchangeState, ActionType<typeof exchangeActions>>;
 
 export const initialExchangeState: IExchangeState = {
-    selectedAction: CurrencyExchangeType.BUY,
+    selectedAction: CurrencyExchangeType.SELL,
     value: '0',
     sellCurrnecy: CurrencyName.USD,
     buyCurrency: CurrencyName.EUR
