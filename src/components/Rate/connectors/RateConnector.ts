@@ -7,6 +7,7 @@ const mapStateToProps = (state: RootState) => {
     const rate = rateSelector(state);
 
     return {
+        error: rate.error,
         value: rate.val,
         sellCurrency: rate.from,
         buyCurrency: rate.to

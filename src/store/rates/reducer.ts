@@ -16,6 +16,7 @@ export interface IRatesState {
     readonly from: CurrencyName | null;
     readonly to: CurrencyName | null;
     readonly val: number | null;
+    readonly error: string | null;
 }
 
 type RatesReducer = Reducer<IRatesState, ActionType<typeof ratesActions>>;
@@ -25,7 +26,8 @@ export const initialRatesState: IRatesState = {
     status: null,
     from: null,
     to: null,
-    val: null
+    val: null,
+    error: null
 };
 
 export const ratesReducer: RatesReducer = (state = initialRatesState, action) => {
@@ -36,10 +38,20 @@ export const ratesReducer: RatesReducer = (state = initialRatesState, action) =>
                 status: ResponseStatus.LOADING
             };
         case (getType(ratesActions.fetchRatesSuccess)):
+            if (state.timestamp > action.payload.timestamp) {
+                return state;
+            }
+
             return {
                 ...state,
                 status: ResponseStatus.OK,
                 ...action.payload
+            };
+        case (getType(ratesActions.fetchRatesError)):
+            return {
+                ...initialRatesState,
+                status: ResponseStatus.ERROR,
+                error: action.payload
             };
         default:
             return state;

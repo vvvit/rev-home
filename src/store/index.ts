@@ -4,7 +4,7 @@ import {combineReducers} from 'redux';
 import {IWalletState, walletReducer} from './wallet/reducer';
 import {IExchangeState, exchangeReducer} from './exchange/reducer';
 import {IRatesState, ratesReducer} from './rates/reducer';
-import {ratesSaga} from './rates/saga';
+import {ratesSaga, pollingRatesSaga} from './rates/saga';
 
 interface RootState {
     wallet: IWalletState,
@@ -19,7 +19,8 @@ const reducers = combineReducers<RootState>({
 });
 
 const sagas = [
-    ratesSaga()
+    ratesSaga(),
+    pollingRatesSaga()
 ];
 
 const rootSaga = function*() {

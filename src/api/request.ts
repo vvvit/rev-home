@@ -18,5 +18,6 @@ export const handleRequestError = (
     let errorMessage = `Failed request to ${requestURL}.`;
 
     if (status) errorMessage += ` Status code: ${status}`;
-    console.error(errorMessage)
+    console.error(errorMessage);
+    console.error('error in axios request');
 };

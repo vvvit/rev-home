@@ -15,5 +15,9 @@
         top: -20px;
         left: 50%;
         transform: translateX(-50%);
+
+        &_error {
+            color: $color-red;
+        }
     }
 }

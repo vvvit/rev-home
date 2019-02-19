@@ -8,11 +8,9 @@ export interface RatesSuccess {
     val: number | null;
 }
 
-const prefix = 'rates';
-
-const fetchRates = createStandardAction(`${prefix}/fetch`)();
-const fetchRatesRequest = createStandardAction(`${prefix}/fetch-request`)();
-const fetchRatesSuccess = createStandardAction(`${prefix}/fetch-success`)<RatesSuccess>();
-const fetchRatesError = createStandardAction(`${prefix}/fetch-error`)();
+const fetchRates = createStandardAction(`rates/fetch`)();
+const fetchRatesRequest = createStandardAction(`rates/fetch-request`)();
+const fetchRatesSuccess = createStandardAction(`rates/fetch-success`)<RatesSuccess>();
+const fetchRatesError = createStandardAction(`rates/fetch-error`)<string>();
 
 export {fetchRates, fetchRatesRequest, fetchRatesSuccess, fetchRatesError};

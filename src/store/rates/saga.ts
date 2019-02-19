@@ -1,10 +1,12 @@
-import {put, call, takeEvery, select} from 'redux-saga/effects';
+import {put, call, takeEvery, select, delay} from 'redux-saga/effects';
 import {getType} from 'typesafe-actions';
 
 import * as ratesActions from './actions';
 import {fetchRates as apiFetchRates, RatesResponse} from '../../api/rate';
 import {exchangeSelector} from '../exchange/selectors'
 import {IExchangeState} from '../exchange/reducer';
+
+const POLLING_DELAY_MS = 10000;
 
 function hasKey<O>(obj: O, key: string | number | symbol): key is keyof O {
     return key in obj;
@@ -16,13 +18,14 @@ const fetchRates = function*() {
     const pair = `${exchange.sellCurrency}_${exchange.buyCurrency}`;
 
     try {
+        const d = new Date();
+        const timestamp = d.getTime();
         const rateResponse: RatesResponse = yield call(apiFetchRates, pair);
 
-        const d = new Date();
         const rate: ratesActions.RatesSuccess = {
+            timestamp,
             from: null,
             to: null,
-            timestamp: d.getTime(),
             val: null
         };
 
@@ -34,8 +37,20 @@ const fetchRates = function*() {
 
         yield put(ratesActions.fetchRatesSuccess(rate));
     } catch (error) {
-        console.log('error');
-        console.log(error);
+        if (error.response && error.response.data) {
+            yield put(ratesActions.fetchRatesError(error.response.data.error));
+        }
+    }
+};
+
+export const pollingRatesSaga = function*() {
+    while (true) {
+        try {
+            yield fetchRates();
+            yield delay(POLLING_DELAY_MS);
+        } catch (error) {
+            console.error(error);
+        }
     }
 };
 

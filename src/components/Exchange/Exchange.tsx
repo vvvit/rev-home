@@ -20,10 +20,6 @@ export interface ExchangeProps {
 }
 
 class Exchange extends React.Component<ExchangeProps> {
-    componentDidMount() {
-        this.props.updateRates();
-    }
-
     componentDidUpdate(prevProps: ExchangeProps) {
         const {sellCurrency, buyCurrency} = this.props;
         if (sellCurrency !== prevProps.sellCurrency ||
