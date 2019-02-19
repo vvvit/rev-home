@@ -1,10 +1,10 @@
-import {put, call, takeEvery, select, delay} from 'redux-saga/effects';
-import {getType} from 'typesafe-actions';
+import { put, call, takeEvery, select, delay } from 'redux-saga/effects';
+import { getType } from 'typesafe-actions';
 
 import * as ratesActions from './actions';
-import {fetchRates as apiFetchRates, RatesResponse} from '../../api/rate';
-import {exchangeSelector} from '../exchange/selectors'
-import {IExchangeState} from '../exchange/reducer';
+import { fetchRates as apiFetchRates, RatesResponse } from '../../api/rate';
+import { exchangeSelector } from '../exchange/selectors';
+import { ExchangeState } from '../exchange/reducer';
 
 const POLLING_DELAY_MS = 10000;
 
@@ -14,7 +14,7 @@ function hasKey<O>(obj: O, key: string | number | symbol): key is keyof O {
 
 const fetchRates = function*() {
     yield put(ratesActions.fetchRatesRequest());
-    const exchange: IExchangeState = yield select(exchangeSelector);
+    const exchange: ExchangeState = yield select(exchangeSelector);
     const pair = `${exchange.sellCurrency}_${exchange.buyCurrency}`;
 
     try {
@@ -49,7 +49,7 @@ export const pollingRatesSaga = function*() {
             yield fetchRates();
             yield delay(POLLING_DELAY_MS);
         } catch (error) {
-            console.error(error);
+            // log error here
         }
     }
 };

@@ -1,4 +1,4 @@
-import {RootState} from '../index';
-import {IExchangeState} from './reducer';
+import { RootState } from '../index';
+import { ExchangeState } from './reducer';
 
-export const exchangeSelector = (state: RootState): IExchangeState => state.exchange;
+export const exchangeSelector = (state: RootState): ExchangeState => state.exchange;

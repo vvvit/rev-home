@@ -1,7 +1,7 @@
-import {Reducer} from 'redux';
-import {ActionType, getType} from 'typesafe-actions';
+import { Reducer } from 'redux';
+import { ActionType, getType } from 'typesafe-actions';
 
-import {CurrencyName} from '../../models/Currency';
+import { CurrencyName } from '../../models/Currency';
 import * as ratesActions from './actions';
 
 const enum ResponseStatus {
@@ -10,7 +10,7 @@ const enum ResponseStatus {
     ERROR = 'error'
 }
 
-export interface IRatesState {
+export interface RatesState {
     readonly timestamp: number;
     readonly status: ResponseStatus | null;
     readonly from: CurrencyName | null;
@@ -19,9 +19,9 @@ export interface IRatesState {
     readonly error: string | null;
 }
 
-type RatesReducer = Reducer<IRatesState, ActionType<typeof ratesActions>>;
+type RatesReducer = Reducer<RatesState, ActionType<typeof ratesActions>>;
 
-export const initialRatesState: IRatesState = {
+export const initialRatesState: RatesState = {
     timestamp: 0,
     status: null,
     from: null,
@@ -31,7 +31,7 @@ export const initialRatesState: IRatesState = {
 };
 
 export const ratesReducer: RatesReducer = (state = initialRatesState, action) => {
-    switch(action.type) {
+    switch (action.type) {
         case (getType(ratesActions.fetchRatesRequest)):
             return {
                 ...state,

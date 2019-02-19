@@ -1,15 +1,15 @@
-import {all} from 'redux-saga/effects';
-import {combineReducers} from 'redux';
+import { all } from 'redux-saga/effects';
+import { combineReducers } from 'redux';
 
-import {IWalletState, walletReducer} from './wallet/reducer';
-import {IExchangeState, exchangeReducer} from './exchange/reducer';
-import {IRatesState, ratesReducer} from './rates/reducer';
-import {ratesSaga, pollingRatesSaga} from './rates/saga';
+import { WalletState, walletReducer } from './wallet/reducer';
+import { ExchangeState, exchangeReducer } from './exchange/reducer';
+import { RatesState, ratesReducer } from './rates/reducer';
+import { ratesSaga, pollingRatesSaga } from './rates/saga';
 
 interface RootState {
-    wallet: IWalletState,
-    exchange: IExchangeState,
-    rates: IRatesState
+    wallet: WalletState;
+    exchange: ExchangeState;
+    rates: RatesState;
 }
 
 const reducers = combineReducers<RootState>({
@@ -27,4 +27,4 @@ const rootSaga = function*() {
     yield all(sagas);
 };
 
-export {reducers, rootSaga, RootState};
+export { reducers, rootSaga, RootState };

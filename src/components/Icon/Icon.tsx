@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {cn} from '@bem-react/classname';
+import { cn } from '@bem-react/classname';
 
 import './Icon.scss';
 
@@ -19,10 +19,10 @@ class Icon extends React.Component<IconProps> {
     };
 
     render() {
-        const {type, size, className} = this.props;
+        const { type, size, className } = this.props;
 
-        return <span className={iconCn({size: size, type}, [className])} />;
+        return <span className={iconCn({ size, type }, [className])} />;
     }
 }
 
-export {Icon, IconProps};
+export { Icon, IconProps };

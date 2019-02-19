@@ -1,16 +1,16 @@
-import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
-import {RootState} from '../../../store';
-import {exchangeSelector} from '../../../store/exchange/selectors';
-import {rateSelector} from '../../../store/rates/selectors';
-import {currancyBalanceSelector} from '../../../store/wallet/selectors';
-import {changeValue as changeValueAction} from '../../../store/exchange/actions';
-import {ICurrencyCardProps} from '../CurrencyCard';
-import {CurrencyExchangeType} from '../../../models/Exchange';
+import { RootState } from '../../../store';
+import { exchangeSelector } from '../../../store/exchange/selectors';
+import { rateSelector } from '../../../store/rates/selectors';
+import { currancyBalanceSelector } from '../../../store/wallet/selectors';
+import { changeValue as changeValueAction } from '../../../store/exchange/actions';
+import { CurrencyCardProps } from '../CurrencyCard';
+import { CurrencyExchangeType } from '../../../models/Exchange';
 
-type OwnProps = Pick<ICurrencyCardProps, 'type'>;
-type DispatchProps = Pick<ICurrencyCardProps, 'onChangeValue'>;
+type OwnProps = Pick<CurrencyCardProps, 'type'>;
+type DispatchProps = Pick<CurrencyCardProps, 'onChangeValue'>;
 
 const calculatePairValue = (rate: number, ammount: number, action: CurrencyExchangeType): string => {
     const actionRate = action === CurrencyExchangeType.SELL ? rate : 1 / rate;

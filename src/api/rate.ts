@@ -1,9 +1,8 @@
-import {AxiosRequestConfig} from 'axios';
+import { AxiosRequestConfig } from 'axios';
 
-import {baseRequest} from './request';
-import {CurrencyName} from '../models/Currency';
+import { baseRequest } from './request';
+import { CurrencyName } from '../models/Currency';
 
-// DON'T COMMIT IN VCS
 const API_KEY = 'e633ec2ee30c96d9f5d2';
 
 export interface RatesResponse {

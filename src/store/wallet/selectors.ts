@@ -1,16 +1,16 @@
-import {createSelector} from 'reselect';
+import { createSelector } from 'reselect';
 
-import {RootState} from '../index';
-import {IWalletState} from './reducer';
-import {CurrencyName} from '../../models/Currency';
+import { RootState } from '../index';
+import { WalletState } from './reducer';
+import { CurrencyName } from '../../models/Currency';
 
-export const walletSelector = (state: RootState): IWalletState => state.wallet;
+export const walletSelector = (state: RootState): WalletState => state.wallet;
 
-type WalletBalance = {[key in CurrencyName]?: number}
+type WalletBalance = {[key in CurrencyName]?: number};
 
-export const currancyBalanceSelector = createSelector<RootState, IWalletState, WalletBalance>(
+export const currancyBalanceSelector = createSelector<RootState, WalletState, WalletBalance>(
     walletSelector,
-    (wallet) => {
+    wallet => {
         const balance: WalletBalance = {};
 
         return wallet.currencies.reduce((acc, curr) => {

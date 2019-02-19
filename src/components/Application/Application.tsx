@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {cn} from '@bem-react/classname';
+import { cn } from '@bem-react/classname';
 
 import { Exchange } from '../Exchange/Exchange';
 import { rateConnector } from '../Exchange/connectors/rateConnector';

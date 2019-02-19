@@ -1,8 +1,8 @@
-import {applyMiddleware, createStore, Middleware} from 'redux';
+import { applyMiddleware, createStore, Middleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
-import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
+import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
-import {rootSaga, reducers} from './';
+import { rootSaga, reducers } from './';
 
 const createAppStore = () => {
     const sagaMiddleware = createSagaMiddleware();
@@ -22,4 +22,4 @@ const createAppStore = () => {
     return store;
 };
 
-export {createAppStore};
+export { createAppStore };

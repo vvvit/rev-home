@@ -1,12 +1,12 @@
 import * as React from 'react';
-import {boundMethod} from 'autobind-decorator';
-import {cn} from "@bem-react/classname";
+import { boundMethod } from 'autobind-decorator';
+import { cn } from '@bem-react/classname';
 
-import {CurrencyExchangeType} from '../../models/Exchange';
+import { CurrencyExchangeType } from '../../models/Exchange';
 
 import './PriceInput.scss';
 
-interface IPriceInputProps {
+interface PriceInputProps {
     value: string;
     type: CurrencyExchangeType;
     onChange: (value: string) => void;
@@ -16,8 +16,8 @@ const cnPriceInput = cn('PriceInput');
 
 export const MAX_VALUE_LENGHT = 15;
 
-export class PriceInput extends React.Component<IPriceInputProps> {
-    static defaultProps: Partial<IPriceInputProps> = {
+export class PriceInput extends React.Component<PriceInputProps> {
+    static defaultProps: Partial<PriceInputProps> = {
         value: '0'
     };
 
@@ -80,7 +80,7 @@ export class PriceInput extends React.Component<IPriceInputProps> {
     }
 
     render() {
-        const {value, type} = this.props;
+        const { value, type } = this.props;
 
         return (
             <div className={cnPriceInput()}>

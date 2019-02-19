@@ -1,4 +1,4 @@
-import {RootState} from '../index';
-import {IRatesState} from './reducer';
+import { RootState } from '../index';
+import { RatesState } from './reducer';
 
-export const rateSelector = (state: RootState): IRatesState => state.rates;
+export const rateSelector = (state: RootState): RatesState => state.rates;

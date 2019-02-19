@@ -19,7 +19,7 @@
     "indent": [true, "spaces", 4],
     "newline-before-return": true,
     "object-literal-sort-keys": false,
-    "object-curly-spacing": [true, "never"],
+    "object-curly-spacing": [true, "always", {"arraysInObjects": false, "objectsInObjects": false}],
     "whitespace": [true, "check-branch", "check-type", "check-operator", "check-typecast"]
   },
   "rulesDirectory": []

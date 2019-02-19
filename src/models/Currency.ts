@@ -2,10 +2,10 @@ export const enum CurrencyName {
     USD = 'USD',
     EUR = 'EUR',
     GBP = 'GBP',
-    RUB = 'RUB',
+    RUB = 'RUB'
 }
 
-export interface ICurrency {
-    name: CurrencyName,
-    value: number
+export interface Currency {
+    name: CurrencyName;
+    value: number;
 }

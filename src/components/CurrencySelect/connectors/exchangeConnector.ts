@@ -1,16 +1,16 @@
-import {connect} from 'react-redux';
-import {Dispatch} from 'redux';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 
-import {RootState} from '../../../store';
-import {ICurrencySelectProps} from '../CurrencySelect'
-import {walletSelector} from '../../../store/wallet/selectors';
-import {changeCurrency} from '../../../store/exchange/actions';
-import {CurrencyExchangeType} from '../../../models/Exchange';
+import { RootState } from '../../../store';
+import { CurrencySelectProps } from '../CurrencySelect';
+import { walletSelector } from '../../../store/wallet/selectors';
+import { changeCurrency } from '../../../store/exchange/actions';
+import { CurrencyExchangeType } from '../../../models/Exchange';
 
 interface OwnProps {
     type: CurrencyExchangeType;
 }
-type DispatchProps = Pick<ICurrencySelectProps, 'onChangeValue'>;
+type DispatchProps = Pick<CurrencySelectProps, 'onChangeValue'>;
 
 const mapStateToProps = (state: RootState) => {
     const wallet = walletSelector(state);
@@ -21,7 +21,7 @@ const mapStateToProps = (state: RootState) => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch, props: OwnProps): DispatchProps => ({
-    onChangeValue: (value) => {
+    onChangeValue: value => {
         dispatch(changeCurrency(value, props.type));
     }
 });

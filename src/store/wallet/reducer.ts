@@ -1,12 +1,12 @@
-import {Reducer} from 'redux';
+import { Reducer } from 'redux';
 
-import {CurrencyName, ICurrency} from '../../models/Currency'
+import { CurrencyName, Currency } from '../../models/Currency';
 
-export interface IWalletState {
-    currencies: Array<ICurrency>;
+export interface WalletState {
+    currencies: Currency[];
 }
 
-export const initialWalletState: IWalletState = {
+export const initialWalletState: WalletState = {
   currencies: [
       {
           name: CurrencyName.USD,
@@ -27,7 +27,7 @@ export const initialWalletState: IWalletState = {
   ]
 };
 
-type WalletReducer = Reducer<IWalletState>;
+type WalletReducer = Reducer<WalletState>;
 
 export const walletReducer: WalletReducer = (state = initialWalletState) => {
     return state;

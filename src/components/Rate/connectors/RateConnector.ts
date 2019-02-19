@@ -1,7 +1,7 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {RootState} from '../../../store';
-import {rateSelector} from '../../../store/rates/selectors';
+import { RootState } from '../../../store';
+import { rateSelector } from '../../../store/rates/selectors';
 
 const mapStateToProps = (state: RootState) => {
     const rate = rateSelector(state);
