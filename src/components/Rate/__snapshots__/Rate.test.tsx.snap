@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Rate renders correctly with error 1`] = `
+<div
+  className="Rate"
+>
+  <div
+    className="Rate-Value Rate-Value_error"
+  >
+    api error
+  </div>
+</div>
+`;
+
+exports[`Rate renders correctly with value and without an error 1`] = `
+<div
+  className="Rate"
+>
+  <div
+    className="Rate-Value"
+  >
+    1 EUR = 0.98 USD
+  </div>
+</div>
+`;

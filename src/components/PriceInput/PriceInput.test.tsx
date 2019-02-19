@@ -2,8 +2,57 @@ import * as React from 'react';
 import { shallow } from 'enzyme';
 
 import { PriceInput, MAX_VALUE_LENGHT } from './PriceInput';
+import { CurrencyExchangeType } from '../../models/Exchange';
 
 describe('PriceInput', () => {
+    let onChange: jest.Mock;
+    const event = { persist: jest.fn(), currentTarget: { value: '1' }};
+
+    beforeEach(() => {
+        onChange = jest.fn();
+        event.currentTarget.value = '0';
+    });
+
+    it('renders correctly with BUY type', () => {
+        expect(shallow(
+            <PriceInput
+                value="100.01"
+                type={CurrencyExchangeType.BUY}
+                onChange={onChange}
+            />
+        )).toMatchSnapshot();
+    });
+
+    it('renders correctly with SELL type', () => {
+        expect(shallow(
+            <PriceInput
+                value="990.01"
+                type={CurrencyExchangeType.SELL}
+                onChange={onChange}
+            />
+        )).toMatchSnapshot();
+    });
+
+    it('call `onChange` when the value is changed', () => {
+        const component = shallow(
+            <PriceInput
+                value="990.01"
+                type={CurrencyExchangeType.SELL}
+                onChange={onChange}
+            />
+        );
+
+        event.currentTarget.value = '1';
+        component.find('.PriceInput-Input')
+            .simulate('change', event);
+        expect(onChange.mock.calls[0][0]).toBe('1');
+
+        event.currentTarget.value = '- 100.01';
+        component.find('.PriceInput-Input')
+            .simulate('change', event);
+        expect(onChange.mock.calls[1][0]).toBe('100.01');
+    });
+
     describe('.formatValue', () => {
         const wrapper = shallow<PriceInput>(
             <PriceInput/>
@@ -33,7 +82,7 @@ describe('PriceInput', () => {
             expect(priceInputInstace.formatValue('3+')).toEqual('3');
         });
 
-        it('string wich can\'t be formated returns \'0\'', () => {
+        it('returns \'0\' for string which can\'t be formed', () => {
             expect(priceInputInstace.formatValue('wrong')).toEqual('0');
             expect(priceInputInstace.formatValue('--33.3')).toEqual('0');
         });

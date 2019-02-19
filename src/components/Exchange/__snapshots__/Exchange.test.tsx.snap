@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Exchange renders correctly 1`] = `
+<div
+  className="Exchange"
+>
+  <Connect(CurrencyCard)
+    type="sell"
+  />
+  <Connect(Rate) />
+  <Connect(CurrencyCard)
+    type="buy"
+  />
+</div>
+`;

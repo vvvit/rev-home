@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencyCard renders correctly with BUY type 1`] = `
+<div
+  className="CurrencyCard CurrencyCard_type_buy"
+>
+  <div
+    className="CurrencyCard-Row"
+  >
+    <Connect(CurrencySelect)
+      type="buy"
+      value="EUR"
+    />
+    <PriceInput
+      onChange={[Function]}
+      type="buy"
+      value="100.01"
+    />
+  </div>
+  <div
+    className="CurrencyCard-Row CurrencyCard-Row_justify_between CurrencyCard-CardInfo"
+  >
+    <div
+      className="CurrencyCard-Info"
+    >
+      Balance: 99 EUR
+    </div>
+  </div>
+</div>
+`;
+
+exports[`CurrencyCard renders correctly with SELL type 1`] = `
+<div
+  className="CurrencyCard CurrencyCard_type_sell"
+>
+  <div
+    className="CurrencyCard-Row"
+  >
+    <Connect(CurrencySelect)
+      type="sell"
+      value="USD"
+    />
+    <PriceInput
+      onChange={[Function]}
+      type="sell"
+      value="100.01"
+    />
+  </div>
+  <div
+    className="CurrencyCard-Row CurrencyCard-Row_justify_between CurrencyCard-CardInfo"
+  >
+    <div
+      className="CurrencyCard-Info CurrencyCard-Info_negative"
+    >
+      Balance: 99 USD
+    </div>
+  </div>
+</div>
+`;

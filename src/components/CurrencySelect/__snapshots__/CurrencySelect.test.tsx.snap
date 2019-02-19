@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CurrencySelect correct renders with open state 1`] = `
+<div
+  className="CurrencySelect"
+>
+  <div
+    className="CurrencySelect-Value"
+    onClick={[Function]}
+  >
+    EUR
+    <Icon
+      size="m"
+      type="arrow-up"
+    />
+  </div>
+  <div
+    className="CurrencySelect-List"
+  >
+    <div
+      className="CurrencySelect-ListItem CurrencySelect-ListItem_selected"
+      onClick={[Function]}
+    >
+      EUR
+    </div>
+    <div
+      className="CurrencySelect-ListItem"
+      key="USD"
+      onClick={[Function]}
+    >
+      USD
+    </div>
+    <div
+      className="CurrencySelect-ListItem"
+      key="RUB"
+      onClick={[Function]}
+    >
+      RUB
+    </div>
+  </div>
+</div>
+`;
+
+exports[`CurrencySelect renders correctly with EUR value 1`] = `
+<div
+  className="CurrencySelect"
+>
+  <div
+    className="CurrencySelect-Value"
+    onClick={[Function]}
+  >
+    EUR
+    <Icon
+      size="m"
+      type="arrow-down"
+    />
+  </div>
+</div>
+`;

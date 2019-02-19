@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PriceInput renders correctly with BUY type 1`] = `
+<div
+  className="PriceInput"
+>
+  <input
+    className="PriceInput-Input"
+    onChange={[Function]}
+    onFocus={[Function]}
+    value="+ 100.01"
+  />
+</div>
+`;
+
+exports[`PriceInput renders correctly with SELL type 1`] = `
+<div
+  className="PriceInput"
+>
+  <input
+    className="PriceInput-Input"
+    onChange={[Function]}
+    onFocus={[Function]}
+    value="- 990.01"
+  />
+</div>
+`;
